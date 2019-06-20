@@ -10,11 +10,23 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    @IBAction func didTapLoginButton() {
+        performSegue(withIdentifier: "segue.main.fromLoginToMain", sender: usernameTextField.text)
     }
 
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let mainAppVC = segue.destination as? MainAppVC,
+            let username = sender as? String {
+            
+            mainAppVC.username = username
+            
+        }
+        
+    }
+    
 }
 
